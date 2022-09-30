@@ -2,7 +2,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const url = "mongodb+srv://uesan:RI53mBtqBQL8PIji@cluster0.m1jmi.mongodb.net/dawdb?retryWrites=true&w=majority"
 mongoose.connect(url);
-//console.log(" Value connected " + mongoose.connection.readyState)
 const Customer = mongoose.model('Customer',
   mongoose.Schema({
     firstName: { type: String },
@@ -18,11 +17,6 @@ app.use(express.json())
 app.use(express.urlencoded())
 //Create customer
 app.post('/api/v1/customer/create', async (req, res) => {
-  // const newCustomer = {
-  //   firstName : req.body.firstName,
-  //   lastName : req.body.lastName,
-  //   age: req.body.age
-  // }
   try {
     await Customer.create(req.body);
     return res.status(200).send("Success");
